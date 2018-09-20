@@ -1,5 +1,5 @@
 import React from 'react';
-import Auxi from '../../hoc/Auxi';
+import Auxi from 'Hoc/Auxi';
 import './layout.scss';
 
 const layout = (props) => (
