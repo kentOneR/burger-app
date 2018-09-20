@@ -1,4 +1,4 @@
-@import '../../../style/variables';
+@import '../../../../style/variables';
 
 .build-control {
     display: flex;
@@ -15,6 +15,8 @@
         border: 1px solid $color-yellow;
         cursor: pointer;
         outline: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
 
         &:disabled {
             background-color: #AC9980;
