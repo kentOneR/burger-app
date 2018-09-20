@@ -1,0 +1,12 @@
+@import '../../../style/variables';
+
+.build-controls {
+    width: 100%;
+    background-color: $color-yellow;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    box-shadow: 0 2px 1px $color-grey;
+    margin: auto;
+    padding: 10px 0;
+}

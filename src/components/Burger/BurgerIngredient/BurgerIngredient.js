@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
+import './burger_ingredient.scss';
 import PropTypes from 'prop-types';
 
 class burgerIngredient extends Component {
-  redner() {
+  render() {
     let ingredient = null;
 
     switch (this.props.type) {
       case ('bread-bottom'):
         ingredient = <div className="burger-ingredient bread-bottom"></div>;
         break;
-      case ('bead-top'):
+      case ('bread-top'):
         ingredient = (
           <div className="burger-ingredient bread-top">
             <div className="seeds1"></div>
@@ -37,7 +38,7 @@ class burgerIngredient extends Component {
   }
 };
 
-burgerIngredient.PropTypes = {
+burgerIngredient.propTypes = {
   type: PropTypes.string.isRequired
 }
 
