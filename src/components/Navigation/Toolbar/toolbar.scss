@@ -1,0 +1,19 @@
+@import '~style/variables';
+
+.toolbar {
+    height: 56px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    padding: 0 20px;
+    background-color: $color-brown;
+    z-index: 5;
+
+    nav {
+        height: 100%;
+    }
+}
