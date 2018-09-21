@@ -1,0 +1,11 @@
+@import '~style/variables';
+
+.logo {
+    background-color: $color-white;
+    padding: 8px;
+    height: 80%;
+
+    img {
+        height: 100%;
+    }
+}
