@@ -1,15 +1,27 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Auxi from 'Hoc/Auxi';
 import Backdrop from 'Components/UI/Backdrop/Backdrop';
 import './modal.scss';
 
-const modal = (props) => (
-    <Auxi>
-        <div className={`modal ${props.show ? 'active' : ''}`}>
-            {props.children}
-        </div>
-        <Backdrop show={props.show} clicked={props.modalClosed} />
-    </Auxi>
-);
+class Modal extends Component {
+  shouldComponentUpdate(nextProps) {
+    return nextProps.show !== this.props.show
+  }
 
-export default modal;
+  componentWillUpdate() {
+    console.log('[Modal] WillUpdate');
+  }
+
+  render() {
+    return (
+      <Auxi>
+        <div className={`modal ${this.props.show ? 'active' : ''}`}>
+          {this.props.children}
+        </div>
+        <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
+      </Auxi>
+    );
+  }
+}
+
+export default Modal;
