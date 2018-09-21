@@ -1,6 +1,6 @@
 .modal {
     position: fixed;
-    z-index: 500;
+    z-index: 20;
     background-color: white;
     width: 70%;
     border: 1px solid #ccc;
@@ -9,7 +9,15 @@
     left: 15%;
     top: 30%;
     box-sizing: border-box;
-    transition: all 0.3s ease-out;
+    transform: translateY(-100vh);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+    overflow: hidden;
+
+    &.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 @media (min-width: 600px) {
