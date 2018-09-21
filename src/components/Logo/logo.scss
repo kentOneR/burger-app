@@ -1,6 +1,10 @@
 @import '~style/variables';
 
 .logo {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: $color-white;
     padding: 8px;
     height: 80%;
