@@ -69,7 +69,7 @@ class BurgerBuilder extends Component {
     const sum = Object.keys(el)
                 .map(key => el[key])
                 .reduce((acc, curVal) => acc + curVal, 0);
-                
+
     this.setState({purchasable: sum > 0});
   }
 
@@ -97,7 +97,8 @@ class BurgerBuilder extends Component {
     return (
       <Auxi>
         <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-          <OrderSummary 
+          <OrderSummary
+            price={this.state.totalPrice} 
             ingredients={this.state.ingredients}
             purchaseContinue={this.purchaseContinueHandler}
             purchaseCancel={this.purchaseCancelHandler} />
