@@ -1,0 +1,21 @@
+@import '~style/variables';
+
+.contact-data {
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid $color-grey;
+    box-shadow: 0 2px 3px $color-grey;
+
+    input {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: $mobile) {
+    .contact-data {
+        width: 700px;
+    }
+}
