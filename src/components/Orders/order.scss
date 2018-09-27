@@ -1,0 +1,9 @@
+@import '~style/variables';
+
+.order {
+    width: 80%;
+    border: 1px solid $color-grey;
+    box-shadow: 0 2px 3px $color-grey;
+    padding: 10px;
+    margin: 10px auto;
+}
