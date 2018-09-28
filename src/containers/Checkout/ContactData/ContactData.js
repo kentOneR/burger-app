@@ -7,32 +7,75 @@ import './contact_data.scss';
 
 class ContactData extends Component {
   state = {
-    name: '',
-    email: '',
-    adress: {
-        street: '',
-        postalCode: '',
-        city: ''
+    orderFrom: {
+      name: {
+        elType: 'input',
+        elConfig: {
+          type: 'text',
+          placeholder: 'Your Name'
+        },
+        value: ''
+      },
+      email: {
+        elType: 'input',
+        elConfig: {
+          type: 'email',
+          placeholder: 'Your email'
+        },
+        value: ''
+      },
+      street: {
+        elType: 'input',
+        elConfig: {
+          type: 'text',
+          placeholder: 'Your street'
+        },
+        value: ''
+      },
+      zipCode: {
+        elType: 'input',
+        elConfig: {
+          type: 'text',
+          placeholder: 'Your ZIP code'
+        },
+        value: ''
+      },
+      city: {
+        elType: 'input',
+        elConfig: {
+          type: 'text',
+          placeholder: 'Your city'
+        },
+        value: ''
+      },
+      deliveryMethod: {
+        elType: 'select',
+        elConfig: {
+          options: [
+            {value: 'fastest', displayValue: 'Fastest'}, 
+            {value: 'cheapest', displayValue: 'Cheapest'}
+          ],
+          placeholder: 'Delivery method'
+        },
+        value: ''
+      },
     },
     loading: false
   }
 
   orderhandler = (e) => {
     e.preventDefault();
-    console.log(this.props.ingredients);
-
     this.setState({loading: true});
+
+    const formData = {};
+    for (let elId in this.state.orderFrom) {
+      formData[elId] = this.state.orderFrom[elId].value;
+    }
 
     const order = {
       ingredient: this.props.ingredients,
       price: this.props.price,
-      customer: {
-        name: 'Max Schar',
-        address: {
-          zipCode: '78190',
-          country: 'France'
-        }
-      }
+      orderData: formData
     }
     axios.post('/orders.json', order)
       .then(res => {
@@ -44,15 +87,44 @@ class ContactData extends Component {
       });
   }
 
+  inputChangedHandler = (e, inputId) => {
+    // const updateForm = {...this.state.orderFrom},
+    //       updateFormEl = {...updateForm[inputId]};
+
+    // updateFormEl.value = e.target.value;
+    // updateForm[inputId] = updateFormEl;
+    // this.setState({
+    //   orderFrom: updateForm
+    // });
+
+    const updateForm = {...this.state.orderFrom};
+    updateForm[inputId].value = e.target.value;
+    this.setState({
+    orderFrom: updateForm
+    });
+  }
+
   render() {
+    const formElArray = [];
+
+    for (let key in this.state.orderFrom) {
+      formElArray.push({
+        id: key,
+        ...this.state.orderFrom[key]
+      });
+    }
+
     let form = (
-      <form>
-        <Input inputtype="input" type="text" name="name" placeholder="your name" />
-        <Input inputtype="input" type="text" name="email" placeholder="your email" />
-        <Input inputtype="input" type="text" name="street" placeholder="your street" />
-        <Input inputtype="input" type="text" name="postalCode" placeholder="your postal code" />
-        <Input inputtype="input" type="text" name="city" placeholder="your city" />
-        <Button btnType="success" clicked={this.orderhandler}>ORDER</Button>
+      <form onSubmit={this.orderhandler}>
+        {formElArray.map(input => (
+          <Input
+            key={input.id} 
+            elType={input.elType}
+            elConfig={input.elConfig} 
+            value={input.value} 
+            changed={(e) => this.inputChangedHandler(e, input.id)} />
+        ))}
+        <Button btnType="success">ORDER</Button>
       </form>
     );
     if (this.state.loading) {

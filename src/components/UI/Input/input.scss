@@ -10,7 +10,9 @@
         margin-bottom: 8px;
     }
 
-    input {
+    input,
+    textarea,
+    select {
         outline: none;
         border: 1px solid $color-grey;
         padding: 6px 10px;

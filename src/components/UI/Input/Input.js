@@ -4,15 +4,24 @@ import './input.scss';
 const input = (props) => {
   let inputEl;
 
-  switch (props.inputtype) {
+  switch (props.elType) {
     case 'input':
-      inputEl = <input {...props}/>;
+      inputEl = <input {...props.elConfig} value={props.value} onChange={props.changed} />;
       break;
     case 'textarea':
-      inputEl = <textarea {...props}/>;
+      inputEl = <textarea {...props.elConfig} value={props.value} onChange={props.changed} />;
+      break;
+    case 'select':
+      inputEl = (
+        <select {...props.elConfig} value={props.value} onChange={props.changed} >
+          {props.elConfig.options.map(op => (
+            <option key={op.value} value={op.value}>{op.displayValue}</option>
+          ))}
+        </select>
+      );
       break;
     default:
-      inputEl = <input {...props}/>;
+      inputEl = <input {...props.elConfig} value={props.value} onChange={props.changed} />;
   }
 
   return (
