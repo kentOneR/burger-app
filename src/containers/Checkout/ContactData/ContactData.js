@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Button from 'Components/UI/Button/Button';
 import Spinner from 'Components/UI/Spinner/Spinner';
 import axios from '../../../AxiosOrders';
+import Input from 'Components/UI/Input/Input';
 import './contact_data.scss';
 
 class ContactData extends Component {
@@ -44,14 +45,16 @@ class ContactData extends Component {
   }
 
   render() {
-    let form = (<form>
-      <input type="text" name="name" placeholder="your name" />
-      <input type="text" name="email" placeholder="your name" />
-      <input type="text" name="street" placeholder="your name" />
-      <input type="text" name="postalCode" placeholder="your name" />
-      <input type="text" name="city" placeholder="your name" />
-      <Button btnType="success" clicked={this.orderhandler}>ORDER</Button>
-    </form>);
+    let form = (
+      <form>
+        <Input inputtype="input" type="text" name="name" placeholder="your name" />
+        <Input inputtype="input" type="text" name="email" placeholder="your email" />
+        <Input inputtype="input" type="text" name="street" placeholder="your street" />
+        <Input inputtype="input" type="text" name="postalCode" placeholder="your postal code" />
+        <Input inputtype="input" type="text" name="city" placeholder="your city" />
+        <Button btnType="success" clicked={this.orderhandler}>ORDER</Button>
+      </form>
+    );
     if (this.state.loading) {
       form = <Spinner />;
     }
