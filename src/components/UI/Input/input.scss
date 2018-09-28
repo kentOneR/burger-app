@@ -3,11 +3,13 @@
 .input {
     width: 100%;
     padding: 10px;
+    position: relative;
 
     label {
         font-weight: bold;
         display: block;
         margin-bottom: 8px;
+        text-align: left;
     }
 
     input,
@@ -23,5 +25,16 @@
             outline: none;
             background-color: $color-grey;
         }
+
+        &.invalid {
+            border: 1px solid $color-red;
+        }
+    }
+
+    .error-message {
+        position: absolute;
+        left: 30%;
+        top: 27px;
+        color: $color-red;
     }
 }

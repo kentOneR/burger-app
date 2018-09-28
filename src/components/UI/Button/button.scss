@@ -24,4 +24,10 @@
         color: $color-orange;
     }
 
+    &:disabled {
+        color: $color-grey;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
 }
