@@ -6,26 +6,18 @@ import Burger from 'Components/Burger/Burger';
 import BuildControls from 'Components/Burger/BuildControls/BuildControls';
 import Modal from 'Components/UI/Modal/Modal';
 import OrderSummary from 'Components/Burger/OrderSummary/OrderSummary';
-import axios from '../../AxiosOrders';
 import Spinner from 'Components/UI/Spinner/Spinner';
+import axios from '../../AxiosOrders';
 import withErrorHandler from 'Hoc/withErrorHandler';
-import * as actionTypes from '../../store/actions';
+import * as bugerBuilderActions from '../../store/actions/index';
 
 class BurgerBuilder extends Component {
   state = {
-    purchasing: false,
-    loading: false,
-    error: false
+    purchasing: false
   }
 
   componentDidMount() {
-    // axios.get('https://burgerapp-17e7d.firebaseio.com/ingredients.json')
-    //   .then(res => {
-    //     this.setState({ingredients: res.data});
-    //   })
-    //   .catch(error => {
-    //     this.setState({error: true})
-    //   });
+    this.props.onInitIngredients();
   }
 
   updatePurchase = (el) => {
@@ -58,7 +50,7 @@ class BurgerBuilder extends Component {
     }
 
     let orderSummary = null;
-    let burger = (this.state.error) ? <p>Ingredients can't be loaded</p> : <Spinner />;
+    let burger = (this.props.error) ? <p>Ingredients can't be loaded</p> : <Spinner />;
 
     if (this.props.ings) {
       burger = (
@@ -81,10 +73,6 @@ class BurgerBuilder extends Component {
       purchaseCancel={this.purchaseCancelHandler} />;
     }
 
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
-    }
-
     return (
       <Auxi>
         <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
@@ -99,14 +87,16 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
   return {
     ings: state.ingredients,
-    price: state.totalPrice
+    price: state.totalPrice,
+    error: state.error
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddIngredient: (name) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName: name}),
-    onRemoveIngredient: (name) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: name})
+    onAddIngredient: (name) => dispatch(bugerBuilderActions.addIngredient(name)),
+    onRemoveIngredient: (name) => dispatch(bugerBuilderActions.removeIngredient(name)),
+    onInitIngredients: () => dispatch(bugerBuilderActions.initIngredients())
   }
 }
 
