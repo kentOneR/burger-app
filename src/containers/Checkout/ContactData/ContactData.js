@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 
 import Button from 'Components/UI/Button/Button';
 import Spinner from 'Components/UI/Spinner/Spinner';
-import axios from '../../../AxiosOrders';
 import Input from 'Components/UI/Input/Input';
+import * as orderActions from '../../../store/actions/index';
+import axios from '../../../AxiosOrders';
+import withErrorHandler from 'Hoc/withErrorHandler';
 import './contact_data.scss';
 
 class ContactData extends Component {
@@ -92,13 +94,11 @@ class ContactData extends Component {
         }
       },
     },
-    loading: false,
     formIsValid: false
   }
 
   orderhandler = (e) => {
     e.preventDefault();
-    this.setState({loading: true});
 
     const formData = {};
     for (let elId in this.state.orderFrom) {
@@ -110,14 +110,8 @@ class ContactData extends Component {
       price: this.props.price,
       orderData: formData
     }
-    axios.post('/orders.json', order)
-      .then(res => {
-        this.setState({loading: false});
-        this.props.history.push('/');
-      })
-      .catch(error => {
-        this.setState({loading: false});
-      });
+
+    this.props.onPurchaseBurger(order);
   }
 
   checkValidity(value, rules) {
@@ -188,7 +182,7 @@ class ContactData extends Component {
         <Button btnType="success" disabled={!this.state.formIsValid}>ORDER</Button>
       </form>
     );
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
 
@@ -203,9 +197,16 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
   return {
-    ings: state.ingredients,
-    price: state.totalPrice
+    ings: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
+    loading: state.order.loading
   }
 }
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+  return {
+    onPurchaseBurger: (order) => dispatch(orderActions.purchaseBurger(order))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
