@@ -1,0 +1,16 @@
+@import '~style/variables';
+
+.auth {
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid $color-grey;
+    box-shadow: 0 2px 3px $color-grey;
+}
+
+@media (min-width: $mobile) {
+    .auth {
+        width: 700px;
+    }
+}
