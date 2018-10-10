@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Auxi from 'Hoc/Auxi';
 import Navigation from 'Components/Navigation/Navigation';
 import './layout.scss';
@@ -24,7 +25,8 @@ class Layout extends Component {
         <Navigation
           toggleNav={this.navToggleHandler}
           closeNav={this.navClosedHandler}
-          showNav={this.state.nav}  />
+          showNav={this.state.nav}
+          isAuth={this.props.isAuth}  />
         <main className="content">
           {this.props.children}
         </main>
@@ -33,4 +35,10 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+const mapStateToProps = state => {
+  return {
+    isAuth: state.auth.token !== null
+  }
+}
+
+export default connect(mapStateToProps)(Layout);

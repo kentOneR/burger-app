@@ -6,8 +6,11 @@ const navigationItems = (props) => (
   <nav>
     <ul className={`navigation-items ${props.show ? "active" : null}`}>
       <li className="navigation-item"><NavLink to="/" exact>Burger Builder</NavLink></li>
-      <li className="navigation-item"><NavLink to="/orders">Orders</NavLink></li>
-      <li className="navigation-item"><NavLink to="/auth">Authenticate</NavLink></li>
+      {props.isAuth ? <li className="navigation-item"><NavLink to="/orders">Orders</NavLink></li> : null}
+      {!props.isAuth 
+        ? <li className="navigation-item"><NavLink to="/auth">Authenticate</NavLink></li>
+        : <li className="navigation-item"><NavLink to="/logout">Logout</NavLink></li>
+      }
     </ul>
   </nav>
 );

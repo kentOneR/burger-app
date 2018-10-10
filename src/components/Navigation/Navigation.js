@@ -10,7 +10,8 @@ const navigation = (props) => (
     <BurgerMenu clicked={props.toggleNav} />
     <Logo />
     <NavigationItems
-      show={props.showNav} />
+      show={props.showNav}
+      isAuth={props.isAuth} />
     <Backdrop
       clicked={props.closeNav} 
       show={props.showNav}/>
