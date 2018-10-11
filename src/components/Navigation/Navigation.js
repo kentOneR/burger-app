@@ -11,7 +11,8 @@ const navigation = (props) => (
     <Logo />
     <NavigationItems
       show={props.showNav}
-      isAuth={props.isAuth} />
+      isAuth={props.isAuth}
+      clicked={props.closeNav} />
     <Backdrop
       clicked={props.closeNav} 
       show={props.showNav}/>

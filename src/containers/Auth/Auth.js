@@ -7,6 +7,7 @@ import * as actions from '../../store/actions/index';
 import Button from 'Components/UI/Button/Button';
 import Input from 'Components/UI/Input/Input';
 import Spinner from 'Components/UI/Spinner/Spinner';
+import {checkValidity} from '../../shared/utility';
 import './auth.scss';
 
 class Auth extends Component {
@@ -50,36 +51,13 @@ class Auth extends Component {
     }
   }
 
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if (!rules) {
-      return true;
-    }
-
-    if (rules.required && isValid) {
-      isValid = value.trim() !== '';
-    }
-
-    if (rules.length && isValid) {
-      isValid = value.length === rules.length;
-    }
-
-    if (rules.isEmail && isValid) {
-      const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      isValid = pattern.test(value);
-    }
-
-    return isValid;
-  }
-
   inputChangedHandler = (e, controlName) => {
     const updateControls = {
       ...this.state.controls,
       [controlName]: {
         ...this.state.controls[controlName],
         value: e.target.value,
-        valid: this.checkValidity(e.target.value, this.state.controls[controlName].validation),
+        valid: checkValidity(e.target.value, this.state.controls[controlName].validation),
         touched: true
       }
     };

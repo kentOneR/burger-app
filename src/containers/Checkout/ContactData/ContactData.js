@@ -7,6 +7,7 @@ import Input from 'Components/UI/Input/Input';
 import * as orderActions from '../../../store/actions/index';
 import axios from '../../../AxiosOrders';
 import withErrorHandler from 'Hoc/withErrorHandler';
+import {checkValidity} from '../../../shared/utility';
 import './contact_data.scss';
 
 class ContactData extends Component {
@@ -115,24 +116,6 @@ class ContactData extends Component {
     this.props.onPurchaseBurger(order, this.props.token);
   }
 
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if (!rules) {
-      return true;
-    }
-
-    if (rules.required && isValid) {
-      isValid = value.trim() !== '';
-    }
-
-    if (rules.length && isValid) {
-      isValid = value.length === rules.length;
-    }
-
-    return isValid;
-  }
-
   inputChangedHandler = (e, inputId) => {
     // const updateForm = {...this.state.orderFrom},
     //       updateFormEl = {...updateForm[inputId]};
@@ -146,7 +129,7 @@ class ContactData extends Component {
     const updateForm = {...this.state.orderFrom};
     updateForm[inputId].value = e.target.value;
     updateForm[inputId].validation.touched = true;
-    updateForm[inputId].validation.valid = this.checkValidity(updateForm[inputId].value, updateForm[inputId].validation);
+    updateForm[inputId].validation.valid = checkValidity(updateForm[inputId].value, updateForm[inputId].validation);
 
     let formIsValid = true;
     for (let id in updateForm) {
