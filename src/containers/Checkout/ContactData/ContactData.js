@@ -117,19 +117,19 @@ class ContactData extends Component {
   }
 
   inputChangedHandler = (e, inputId) => {
-    // const updateForm = {...this.state.orderFrom},
-    //       updateFormEl = {...updateForm[inputId]};
+    const updateForm = {...this.state.orderFrom},
+          updateFormEl = {...updateForm[inputId]},
+          updateFromValidation = {...updateFormEl.validation};
 
-    // updateFormEl.value = e.target.value;
-    // updateForm[inputId] = updateFormEl;
-    // this.setState({
-    //   orderFrom: updateForm
-    // });
+    updateFormEl.value = e.target.value;
+    updateFromValidation.touched = true;
+    updateFromValidation.valid = checkValidity(updateForm[inputId].value, updateForm[inputId].validation);
 
-    const updateForm = {...this.state.orderFrom};
-    updateForm[inputId].value = e.target.value;
-    updateForm[inputId].validation.touched = true;
-    updateForm[inputId].validation.valid = checkValidity(updateForm[inputId].value, updateForm[inputId].validation);
+    updateFormEl.validation = updateFromValidation;
+    updateForm[inputId] = updateFormEl;
+    this.setState({
+      orderFrom: updateForm
+    });
 
     let formIsValid = true;
     for (let id in updateForm) {
