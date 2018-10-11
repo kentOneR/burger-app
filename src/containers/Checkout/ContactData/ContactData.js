@@ -136,7 +136,6 @@ class ContactData extends Component {
     for (let id in updateForm) {
       formIsValid = formIsValid && updateForm[id].validation.valid;
     }
-    console.log(formIsValid);
     
     this.setState({orderFrom: updateForm,formIsValid: formIsValid});
   }
