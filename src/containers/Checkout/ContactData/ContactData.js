@@ -35,6 +35,7 @@ class ContactData extends Component {
         value: '',
         validation: {
           required: true,
+          isEmail: true,
           valid: false,
           touched: false
         }
@@ -123,7 +124,7 @@ class ContactData extends Component {
 
     updateFormEl.value = e.target.value;
     updateFromValidation.touched = true;
-    updateFromValidation.valid = checkValidity(updateForm[inputId].value, updateForm[inputId].validation);
+    updateFromValidation.valid = checkValidity(updateFormEl.value, updateFromValidation);
 
     updateFormEl.validation = updateFromValidation;
     updateForm[inputId] = updateFormEl;
