@@ -16,5 +16,6 @@ export const    ADD_INGREDIENT = 'ADD_INGREDIENT',
                 AUTH_SUCCESS = 'AUTH_SUCCESS',
                 AUTH_FAIL = 'AUTH_FAIL',
                 AUTH_LOGOUT =  'AUTH_LOGOUT',
+                AUTH_INIT_LOGOUT = 'AUTH_INIT_LOGOUT',
 
                 SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';
