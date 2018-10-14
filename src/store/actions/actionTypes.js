@@ -12,9 +12,12 @@ export const    ADD_INGREDIENT = 'ADD_INGREDIENT',
                 FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS',
                 FETCH_ORDERS_FAIL = 'FETCH_ORDERS_FAIL',
 
+                AUTH_USER = 'AUTH_USER',
                 AUTH_START = 'AUTH_START',
                 AUTH_SUCCESS = 'AUTH_SUCCESS',
                 AUTH_FAIL = 'AUTH_FAIL',
+                AUTH_CHECK_STATE = 'AUTH_CHECK_STATE',
+                AUTH_CHECK_TIMEOUT = 'AUTH_CHECK_TIMEOUT',
                 AUTH_LOGOUT =  'AUTH_LOGOUT',
                 AUTH_INIT_LOGOUT = 'AUTH_INIT_LOGOUT',
 
